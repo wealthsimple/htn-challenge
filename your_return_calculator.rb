@@ -10,6 +10,26 @@ class YourReturnCalculator < ReturnCalculator
     # snapshot.cash_flow
     # snapshot.market_value
 
-    BigDecimal.new(1)
+    periods = []
+    snapshots.each_with_index  do |snapshot, i|
+        next if i == 0 # We need to start at the second day
+        periods << naive_func(snapshot, snapshots[i-1])
+    end
+
+    return geom_link(periods)
   end
+
+  def naive_func (current, previous)
+      ((current.market_value - current.cash_flow) / previous.market_value) - 1.to_b
+  end
+
+  def geom_link (periods)
+      periods.reduce(1.to_b) { |sum, n| sum * (1.to_b + n) } - 1.to_b
+  end
+end
+
+class Integer
+    def to_b
+        BigDecimal.new(self)
+    end
 end
