@@ -2,6 +2,12 @@
 This was my submission for the Wealthsimple Hack The North Lightning Challenge.
 All of my code is included within the file 'your_return_calculator.rb'
 
+
+
+  
+   
+   
+   
 The original challenge README is included below. 
 
 
